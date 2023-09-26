@@ -7,7 +7,7 @@ const categories = [
 
 const Header = () => {
   return (
-    <div className="h-24 m-8 flex  border-b justify-between">
+    <div className="h-24 mb-8 mx-8 flex  border-b justify-between">
       <div 
         className="flex items-center h-full
         text-3xl italic text-gray-50">
