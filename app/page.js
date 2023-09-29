@@ -1,4 +1,4 @@
-import { PostCard, Categories, PostWidget } from "../components/index";
+import { PostCard, Categories, PostRecent } from "../components/index";
 import { getPosts } from "@/server";
 
 // 在 Next.js 中，getStaticProps 是一个特殊的静态生成函数，用于在构建时获取页面所需的数据。它会在服务器端运行，并将返回的数据作为 props 参数传递给页面组件。
@@ -18,7 +18,7 @@ export default async function Home() {
         </div>
         <div className="col-span-4">
           <div>
-            <PostWidget />
+            <PostRecent />
             <Categories />
           </div>
         </div>
