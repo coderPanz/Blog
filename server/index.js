@@ -1,12 +1,11 @@
 import { gql, GraphQLClient } from "graphql-request";
 
-
 // 最新方法, 不用单独从graphql-request导入request方法
 const graphQLClient = new GraphQLClient(
-  'https://api-ap-northeast-1.hygraph.com/v2/clmulqpso058501t8fvvt1utk/master'
+  "https://api-ap-northeast-1.hygraph.com/v2/clmulqpso058501t8fvvt1utk/master"
 );
 
-// 展示帖子所需的数据
+// 获取主页帖子所需的数据
 export const getPosts = async () => {
   const query = gql`
     query MyQuery {
@@ -37,29 +36,65 @@ export const getPosts = async () => {
       }
     }
   `;
-  const res = await graphQLClient.request(query)
+  const res = await graphQLClient.request(query);
   return res.postsConnection.edges;
 };
 
-// 展示最近帖子的数据
+// 获取slug指定的帖子
+export const getAppointPost = async (slug) => {
+  const query = gql`
+    query AppointPostQuery($slug: String!) {
+      post(where: { slug: $slug }) {
+        title
+        excerpt
+        featuredImage {
+          url
+        }
+        author {
+          name
+          bio
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        content {
+          text
+        }
+        categories {
+          name
+          slug
+        }
+      }
+    }
+  `;
+  const res = await graphQLClient.request(query, { slug });
+  return res.post;
+};
+
+// 获取最近帖子的数据
 export const getRecentPosts = async () => {
   const query = gql`
     query MyQuery {
-      posts(last: 3, orderBy: createdAt_ASC) {
+      posts(last: 4, orderBy: createdAt_ASC) {
         title
         slug
         featuredImage {
           url
         }
         createdAt
+        author {
+          name
+        }
       }
     }
   `;
-  const res = await graphQLClient.request(query)
+  const res = await graphQLClient.request(query);
   return res.posts;
 };
 
-// 获取与slug相关类型的帖子
+// 获取最近与slug相关类型的帖子
 export const getSimilarPosts = async (categories, slug) => {
   const query = gql`
     query MyQuery($slug: String!, $categories: [String!]) {
@@ -83,8 +118,20 @@ export const getSimilarPosts = async (categories, slug) => {
       }
     }
   `;
-    const res = await graphQLClient.request(query);
-    return res.posts;
+  const res = await graphQLClient.request(query);
+  return res.posts;
 };
 
-
+// 获取帖子类型的数据
+export const getCategories = async () => {
+  const query = gql`
+    query MyQuery {
+      categories {
+        name
+        slug
+      }
+    }
+  `;
+  const res = await graphQLClient.request(query);
+  return res.categories;
+};
