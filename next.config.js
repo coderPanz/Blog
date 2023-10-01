@@ -8,6 +8,10 @@ const nextConfig = {
   images: {
     domains: ['avatars.githubusercontent.com', 'media.graphassets.com'],
   },
+  env: {
+    NEXT_GRAPHCMS_ENDPOINT: process.env.NEXT_GRAPHCMS_ENDPOINT,
+    GRAPHCMS_TOKEN: process.env.GRAPHCMS_TOKEN
+  }
 }
 
 module.exports = nextConfig

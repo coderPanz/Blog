@@ -2,7 +2,7 @@
 "use client";
 import { getAppointPost } from "@/server";
 import { useEffect, useState } from "react";
-import { PostCard, PostRecent, Categories } from "@/components";
+import { PostCard, PostRecent, Categories, CommentForm, Comment } from "@/components";
 // 动态的部分作为params传递到该组件, 详情参见:
 // https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes
 
@@ -20,6 +20,8 @@ const Page = ({ params }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div className="col-span-8">
           <PostCard post={post} isShow={false}/>
+          <CommentForm slug={slug}/>
+          <Comment slug={slug}/>
         </div>
         <div className="lg:col-span-4 col-span-1">
           <div>

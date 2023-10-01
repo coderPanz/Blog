@@ -1,11 +1,13 @@
 import moment from "moment/moment";
 import Link from "next/link";
+import Markdown from 'react-markdown'
 
 const PostCard = ({ post, isShow }) => {
-  console.log(post)
+  // 难点: 显示帖子的内容, 其中可能包含加粗, 图片, 斜体换行显示等等, 需要前端正确的显示
+  // console.log(post)
   return (
     // 总容器
-    <div className=" bg-gray-50 p-6 rounded-xl shadow-lg mb-10">
+    <div className=" bg-gray-50 py-7 px-7 rounded-xl shadow-lg mb-10">
       {/* 图片 */}
       <div className="w-full mb-5">
         <img
@@ -49,7 +51,8 @@ const PostCard = ({ post, isShow }) => {
           <div className="mb-5">{post?.excerpt}</div>
           {/* 按钮 */}
           <div className="w-full text-center text-white">
-            <Link href={`posts/${post?.slug}`}>
+            {/* 记住href一定要先写 '/' 符号表示从根路由开始匹配, 否则多组件嵌套跳转是会发生问题 */}
+            <Link href={`/posts/${post?.slug}`}>
               <button className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md">
                 愿闻其详
               </button>
@@ -57,9 +60,9 @@ const PostCard = ({ post, isShow }) => {
           </div>
         </div>
       ) : (
-        // 正文
+        // 正文(转化为markdown语法显示)
         <div>
-          {post?.content.text}
+          <Markdown>{post?.content.markdown}</Markdown>
         </div>
       )}
     </div>

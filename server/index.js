@@ -1,9 +1,13 @@
 import { gql, GraphQLClient } from "graphql-request";
 
+const graphqlAPI = process.env.NEXT_GRAPHCMS_ENDPOINT
+
 // 最新方法, 不用单独从graphql-request导入request方法
-const graphQLClient = new GraphQLClient(
-  "https://api-ap-northeast-1.hygraph.com/v2/clmulqpso058501t8fvvt1utk/master"
-);
+const graphQLClient = new GraphQLClient((graphqlAPI), {
+  headers: {
+    authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
+  }
+});
 
 // 获取主页帖子所需的数据
 export const getPosts = async () => {
@@ -61,6 +65,7 @@ export const getAppointPost = async (slug) => {
         slug
         content {
           text
+          markdown
         }
         categories {
           name
@@ -69,7 +74,7 @@ export const getAppointPost = async (slug) => {
       }
     }
   `;
-  const res = await graphQLClient.request(query, { slug });
+  const res = await graphQLClient.request(query, { slug: slug });
   return res.post;
 };
 
@@ -118,7 +123,10 @@ export const getSimilarPosts = async (categories, slug) => {
       }
     }
   `;
-  const res = await graphQLClient.request(query);
+  const res = await graphQLClient.request(query, {
+    slug: slug,
+    categories: categories
+  });
   return res.posts;
 };
 
@@ -135,3 +143,88 @@ export const getCategories = async () => {
   const res = await graphQLClient.request(query);
   return res.categories;
 };
+
+// 获取所有指定类型的博客
+export const getCategoriesAll = async (slug) => {
+  const query = gql`
+    query GetCategoryPost($slug: String!) {
+      postsConnection(where: {categories_some: {slug: $slug}}) {
+        edges {
+          cursor
+          node {
+            author {
+              bio
+              name
+              id
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+            categories {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const res = await graphQLClient.request(query, { slug: slug });
+  console.log(res.postsConnection.edges)
+  return res.postsConnection.edges;
+};
+
+// 提交评论
+export const submitComment = async (obj) => {
+  try {
+    const query = gql`
+      mutation CreateComment($name: String!, $email: String!, $comment: String!, $slug: String!) {
+        createComment(data: {
+          name: $name,
+          email: $email,
+          comment: $comment,
+          post: {
+            connect: {slug: $slug}
+          }
+        }) {
+          #只需要返回id
+          id
+        }
+      }
+    `
+    const res = await graphQLClient.request(query, {
+      name: obj.name,
+      email:obj.email,
+      comment: obj.comment,
+      slug: obj.slug
+    });
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// 获取评论
+export const getComments = async (slug) => {
+  const query = gql`
+    query GetComments($slug: String!) {
+      comments(where: {post: {slug: $slug}}) {
+        name
+        createdAt
+        comment
+      }
+    }
+  `
+  const res = await graphQLClient.request(query, {
+    slug: slug
+  })
+  return res.comments
+}
