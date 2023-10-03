@@ -47,8 +47,12 @@ const CommentForm = ({ slug }) => {
     // 结构formData中的数据
     const { name, email, isRemember, comment } = inputObj
     // 检查是否输入完全
-    if(!name || !email || !isRemember) {
+    if(!name || !email || !comment) {
       setError(true)
+      // 3秒后提示消失
+      setTimeout(() => {
+        setError(false)
+      }, 3000);
       return
     }
     // 若复选框选中, 则缓存数据到localStorage中
@@ -85,7 +89,7 @@ const CommentForm = ({ slug }) => {
           // 3秒后提示消失
           setTimeout(() => {
             setShowSuccessMessage(false);
-          }, 3000);
+          }, 2500);
         }
       });
 
@@ -110,15 +114,16 @@ const CommentForm = ({ slug }) => {
         <label className="text-sm ml-2">记住用户信息</label>
       </div>
       {/* 出错提示 */}
-      {error && <p className="text-xs text-red-500">缺失必填字段!</p>}
+      {error && <p className="text-sm text-red-500 absolute">缺失必填字段!</p>}
       {/* 提交按钮 */}
       <div className="text-center mt-5">
         <button onClick={handlePostSubmission} className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md text-white">
           提交
         </button>
+        {showSuccessMessage && <button className="text-base rounded-md w-28 h-10 text-white absolute bg-green-500 ml-72">已提交待审查</button>}
       </div>
       {/* 成功提示 */}
-      {showSuccessMessage && <span className="text-xl float-right font-semibold mt-3 text-green-500">已提交请等待审查</span>}
+
     </div>
   );
 };

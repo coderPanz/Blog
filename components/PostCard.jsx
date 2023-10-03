@@ -1,13 +1,22 @@
+"use client";
 import moment from "moment/moment";
 import Link from "next/link";
-import Markdown from 'react-markdown'
+import Markdown from "react-markdown";
+import hljs from "@/utils/highlight";
+import { useEffect } from "react";
+
+import "highlight.js/styles/default.css";
 
 const PostCard = ({ post, isShow }) => {
   // 难点: 显示帖子的内容, 其中可能包含加粗, 图片, 斜体换行显示等等, 需要前端正确的显示
-  // console.log(post)
+  const markData = post?.content?.markdown.toString();
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [markData]);
+
   return (
     // 总容器
-    <div className=" bg-gray-50 py-7 px-7 rounded-xl shadow-lg mb-10">
+    <div className=" bg-gray-50 py-7 px-7 rounded-xl shadow-lg mb-8">
       {/* 图片 */}
       <div className="w-full mb-5">
         <img
@@ -18,12 +27,16 @@ const PostCard = ({ post, isShow }) => {
       </div>
       {/* 头像作者日期 */}
       <div className="flex items-center italic text-gray-600 text-2xl mb-8">
-        <img
-          src={post?.author.photo.url}
-          alt={post?.author.name}
-          className="rounded-full w-9 h-9 mr-4"
-        />
-        <p className="mr-5 text-lg">{post?.author.name}</p>
+        <Link href={"https://github.com/coderPanz"}>
+          <img
+            src={post?.author.photo.url}
+            alt={post?.author.name}
+            className="rounded-full w-9 h-9 mr-4"
+          />
+        </Link>
+        <Link href={"https://github.com/coderPanz"}>
+          <span className="mr-5 text-lg">{post?.author.name}</span>
+        </Link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 inline mr-2 text-pink-500"
@@ -62,7 +75,7 @@ const PostCard = ({ post, isShow }) => {
       ) : (
         // 正文(转化为markdown语法显示)
         <div>
-          <Markdown>{post?.content.markdown}</Markdown>
+          <Markdown>{markData}</Markdown>
         </div>
       )}
     </div>
