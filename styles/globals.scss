@@ -66,28 +66,30 @@ h5,
 h6 
 {
   font-weight: 700;
+  font-style: italic;
+  // font-family: 'Times New Roman', Times, serif;
 }
 h1 {
-  font-size: 32px;
+  font-size: 36px;
   margin: 20px 0 20px 0;
 }
 h2 {
-  font-size: 24px;
+  font-size: 28px;
   margin: 18px 0 18px 0;
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 24px;
   margin: 16px 0 16px 0;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 18px;
   margin: 12px 0 12px 0;
 }
 
 h5 {
-  font-size: 14;
+  font-size: 16px;
   margin: 8px 0 8px 0;
 }
 
@@ -102,6 +104,13 @@ pre {
 }
 code {
   border-radius: 10px;
+}
+li,
+p {
+  font-size: 18px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-family: 'Times New Roman', Times, serif;
 }
 * {
   box-sizing: border-box;

@@ -5,10 +5,10 @@ import Markdown from "react-markdown";
 import hljs from "@/utils/highlight";
 import { useEffect } from "react";
 
-import "highlight.js/styles/default.css";
+import "highlight.js/styles/an-old-hope.css";
 
 const PostCard = ({ post, isShow }) => {
-  // 难点: 显示帖子的内容, 其中可能包含加粗, 图片, 斜体换行显示等等, 需要前端正确的显示
+
   const markData = post?.content?.markdown.toString();
   useEffect(() => {
     hljs.highlightAll();
@@ -56,7 +56,7 @@ const PostCard = ({ post, isShow }) => {
         </span>
       </div>
       {/* 标题 */}
-      <div className="text-4xl font-bold mb-8">{post?.title}</div>
+      <div className="text-4xl font-bold mb-8 italic">{post?.title}</div>
       {/* 显示主页和指定帖子根据isShow */}
       {isShow ? (
         <div>
