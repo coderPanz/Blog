@@ -61,7 +61,7 @@ const PostCard = ({ post, isShow }) => {
       {isShow ? (
         <div>
           {/* 概述 */}
-          <div className="mb-5">{post?.excerpt}</div>
+          <div className="mb-5 text-xl">{post?.excerpt}</div>
           {/* 按钮 */}
           <div className="w-full text-center text-white">
             {/* 记住href一定要先写 '/' 符号表示从根路由开始匹配, 否则多组件嵌套跳转是会发生问题 */}
