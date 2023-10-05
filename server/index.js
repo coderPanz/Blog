@@ -1,13 +1,32 @@
 import { gql, GraphQLClient } from "graphql-request";
 
-const graphqlAPI = process.env.NEXT_GRAPHCMS_ENDPOINT
+const graphqlAPI = process.env.NEXT_GRAPHCMS_ENDPOINT;
 
 // 最新方法, 不用单独从graphql-request导入request方法
-const graphQLClient = new GraphQLClient((graphqlAPI), {
+const graphQLClient = new GraphQLClient(graphqlAPI, {
   headers: {
     authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-  }
+  },
 });
+// 获取作者信息(因为是我的博客, 所以id就此固定)
+export const getAuthor = async () => {
+  const query = gql`
+    query GetAuthor {
+      author(where: { id: "clmuniup30umw0b18v5jbpt4x" }) {
+        bio
+        name
+        id
+        photo {
+          url
+        }
+      }
+    }
+  `;
+  const res = await graphQLClient.request(query, {
+    id: "clmuniup30umw0b18v5jbpt4x",
+  });
+  return res.author;
+};
 
 // 获取主页帖子所需的数据
 export const getPosts = async () => {
@@ -127,7 +146,7 @@ export const getSimilarPosts = async (categories, slug) => {
   `;
   const res = await graphQLClient.request(query, {
     slug: slug,
-    categories: categories
+    categories: categories,
   });
   return res.posts;
 };
@@ -150,7 +169,7 @@ export const getCategories = async () => {
 export const getCategoriesAll = async (slug) => {
   const query = gql`
     query GetCategoryPost($slug: String!) {
-      postsConnection(where: {categories_some: {slug: $slug}}) {
+      postsConnection(where: { categories_some: { slug: $slug } }) {
         edges {
           cursor
           node {
@@ -180,7 +199,7 @@ export const getCategoriesAll = async (slug) => {
   `;
 
   const res = await graphQLClient.request(query, { slug: slug });
-  console.log(res.postsConnection.edges)
+  console.log(res.postsConnection.edges);
   return res.postsConnection.edges;
 };
 
@@ -188,45 +207,50 @@ export const getCategoriesAll = async (slug) => {
 export const submitComment = async (obj) => {
   try {
     const query = gql`
-      mutation CreateComment($name: String!, $email: String!, $comment: String!, $slug: String!) {
-        createComment(data: {
-          name: $name,
-          email: $email,
-          comment: $comment,
-          post: {
-            connect: {slug: $slug}
+      mutation CreateComment(
+        $name: String!
+        $email: String!
+        $comment: String!
+        $slug: String!
+      ) {
+        createComment(
+          data: {
+            name: $name
+            email: $email
+            comment: $comment
+            post: { connect: { slug: $slug } }
           }
-        }) {
+        ) {
           #只需要返回id
           id
         }
       }
-    `
+    `;
     const res = await graphQLClient.request(query, {
       name: obj.name,
-      email:obj.email,
+      email: obj.email,
       comment: obj.comment,
-      slug: obj.slug
+      slug: obj.slug,
     });
-    return res
+    return res;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 // 获取评论
 export const getComments = async (slug) => {
   const query = gql`
     query GetComments($slug: String!) {
-      comments(where: {post: {slug: $slug}}) {
+      comments(where: { post: { slug: $slug } }) {
         name
         createdAt
         comment
       }
     }
-  `
+  `;
   const res = await graphQLClient.request(query, {
-    slug: slug
-  })
-  return res.comments
-}
+    slug: slug,
+  });
+  return res.comments;
+};

@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const Categories = () => {
   const [ categories, setCategories ] = useState([])
+  const [ index, setIndex ] = useState(0)
 
   useEffect(() => {
     (async () => {
@@ -13,6 +14,11 @@ const Categories = () => {
       setCategories(res)
     })()
   })
+
+  const handleShowMore = () => {
+    setIndex(preIndex => preIndex + 3)
+  }
+
   return (
     <>
       {/* 文章类别 */}
@@ -24,13 +30,14 @@ const Categories = () => {
         {/* 数据盒子 */}
         <div>
           {
-            categories.map(category => (
+            categories.slice(0, index + 3).map(category => (
               <Link href={`/category/${category.slug}`} key={category.name}>
                 <p className="mt-5 text-gray-600">{category.name}</p>
               </Link>
             ))
           }
         </div>
+        <button onClick={handleShowMore} className="bg-gray-200 h-6 w-20 rounded">更多类型</button>
       </div>
     </>
   );

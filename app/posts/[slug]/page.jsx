@@ -17,13 +17,13 @@ const Page = ({ params }) => {
 
   return (
     <div className="container mx-auto px-8 mb-8">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <div className="col-span-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="col-span-9">
           <PostCard post={post} isShow={false}/>
           <CommentForm slug={slug}/>
           <Comment slug={slug}/>
         </div>
-        <div className="lg:col-span-4 col-span-1">
+        <div className="lg:col-span-3 col-span-1">
           <div>
             <PostRecent />
             <Categories />

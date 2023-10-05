@@ -37,7 +37,7 @@ const PostRecent = ({ categories, slug }) => {
                 <img
                   src={item.featuredImage.url}
                   alt=""
-                  className="w-9 h-9 rounded-full"
+                  className="w-12 h-12 rounded-full"
                 />
                 <div className="ml-5">
                   <span className="h-5 text-lg font-medium">{item.title}</span>
