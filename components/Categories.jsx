@@ -22,22 +22,24 @@ const Categories = () => {
   return (
     <>
       {/* 文章类别 */}
-      <div className="bg-white rounded-xl px-7 pb-7">
+      <div className="bg-white rounded-xl px-7 pb-7 border-8">
         {/* 标题 */}
         <div className="font-bold text-2xl font-mono text-center py-3 border-b">
           文章类别
         </div>
         {/* 数据盒子 */}
-        <div>
+        <div className="mt-5">
           {
             categories.slice(0, index + 3).map(category => (
               <Link href={`/category/${category.slug}`} key={category.name}>
-                <p className="mt-5 text-gray-600">{category.name}</p>
+                <p className="mb-3 text-white transition ease-in-out delay-150 bg-blue-400 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-400 duration-300 rounded-md h-10 text-center leading-10">{category.name}</p>
               </Link>
             ))
           }
         </div>
-        <button onClick={handleShowMore} className="bg-gray-200 h-6 w-20 rounded">更多类型</button>
+        <div className="h-5 mt-4 w-full text-center">
+          <button onClick={handleShowMore} className="text-white py-1 w-20 transition ease-in-out delay-150 bg-green-600 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-400 duration-300 rounded">更多类型</button>
+        </div>
       </div>
     </>
   );

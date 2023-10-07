@@ -3,7 +3,7 @@ const Profile = ({ author, posts }) => {
   return (
     <>
       {/* 作者简介 */}
-      <div className="bg-white rounded-xl px-7 pb-7 mb-8">
+      <div className="bg-white rounded-xl px-7 pb-7 mb-8 border-8">
         {/* 标题 */}
         <div className="font-bold text-2xl font-mono text-center py-3 border-b">
           作者简介

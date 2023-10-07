@@ -24,7 +24,7 @@ const PostRecent = ({ categories, slug }) => {
   return (
     <>
       {/* 近期文章 */}
-      <div className="bg-white rounded-xl px-7 pb-7 mb-8">
+      <div className="bg-white rounded-xl px-7 pb-7 mb-8 border-8">
         <div className="font-bold text-2xl font-mono text-center py-3 border-b">
           近期文章
         </div>
@@ -33,7 +33,7 @@ const PostRecent = ({ categories, slug }) => {
           {/* 单条展示项目(map渲染) */}
           {relatedPosts.map((item) => (
             <Link key={item.title} href={`/posts/${item.slug}`}>
-              <div className="mt-4 flex items-center">
+              <div className="mt-4 flex text-white items-center transition ease-in-out delay-150 bg-blue-400 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-400 duration-300 rounded-lg px-3 py-2">
                 <img
                   src={item.featuredImage.url}
                   alt=""
@@ -42,7 +42,7 @@ const PostRecent = ({ categories, slug }) => {
                 <div className="ml-5">
                   <span className="h-5 text-lg font-medium">{item.title}</span>
                   {/* <span className="h-5 text-lg">({item.author.name})</span> */}
-                  <p className="h-5 text-gray-500 italic text-sm">
+                  <p className="h-5 italic text-sm">
                     {moment(item.createdAt).format("YYYY-MM-DD")}
                   </p>
                 </div>

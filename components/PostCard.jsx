@@ -66,7 +66,7 @@ const PostCard = ({ post, isShow }) => {
           <div className="w-full text-center text-white">
             {/* 记住href一定要先写 '/' 符号表示从根路由开始匹配, 否则多组件嵌套跳转是会发生问题 */}
             <Link href={`/posts/${post?.slug}`}>
-              <button className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md">
+              <button className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md text-center">
                 愿闻其详
               </button>
             </Link>
