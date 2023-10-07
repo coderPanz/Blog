@@ -2,10 +2,10 @@
 import moment from "moment/moment";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import hljs from "@/utils/highlight";
+import hljs from "highlight.js";
 import { useEffect } from "react";
 
-import "highlight.js/styles/an-old-hope.css";
+import "highlight.js/styles/agate.css";
 
 const PostCard = ({ post, isShow }) => {
 

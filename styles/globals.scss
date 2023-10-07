@@ -98,8 +98,8 @@ h6 {
 }
 
 pre {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 code {
   border-radius: 10px;
@@ -110,6 +110,19 @@ p {
   margin-top: 4px;
   margin-bottom: 4px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+ul, 
+ol {
+  list-style:disc;
+  padding-left: 40px;
+  margin: 16px 0 16px 0;
+}
+li {
+  margin: 4px 0 4px 0;
+}
+img {
+  width: 100%;
+  border-radius: 10px;
 }
 * {
   box-sizing: border-box;

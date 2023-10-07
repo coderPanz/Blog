@@ -27,7 +27,7 @@ const Profile = ({ author, posts }) => {
         </Link>
         <div className="flex mt-2">
         </div>
-        <img src="https://skillicons.dev/icons?i=js,ts,vue,nodejs,mongodb,vscode,react,next" />
+        <img  src="https://skillicons.dev/icons?i=ts,vue,react,nodejs,mongodb,vite" />
         {/* 方向 */}
         {/* bio */}
         <div className="mt-4 text-lg italic bg-gray-100 rounded-lg p-4">
