@@ -124,6 +124,12 @@ img {
   width: 100%;
   border-radius: 10px;
 }
+code {
+  border-radius: 3px;
+  display: inline-block;
+  padding: 0px 4px 0px 4px;
+  background-color: #DDDDDD;
+}
 * {
   box-sizing: border-box;
 }

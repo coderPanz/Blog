@@ -24,7 +24,7 @@ const PostRecent = ({ categories, slug }) => {
   return (
     <>
       {/* 近期文章 */}
-      <div className="bg-white rounded-xl px-7 pb-7 mb-8 border-8">
+      <div className="bg-white rounded-xl px-7 pb-7 mb-8 border-8 border-gray-300">
         <div className="font-bold text-2xl font-mono text-center py-3 border-b">
           近期文章
         </div>

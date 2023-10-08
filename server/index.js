@@ -31,35 +31,44 @@ export const getAuthor = async () => {
 // 获取主页帖子所需的数据
 export const getPosts = async () => {
   const query = gql`
-    query MyQuery {
-      postsConnection {
-        edges {
-          node {
-            author {
-              bio
-              name
-              id
-              photo {
-                url
-              }
-            }
-            createdAt
-            slug
-            title
-            excerpt
-            featuredImage {
-              url
-            }
-            categories {
-              name
-              slug
-            }
+    query MyQuery($first: Int, $where: PostWhereInput) {
+    postsConnection(
+      first: $first
+      where: $where
+  ) {
+    edges {
+			node {
+        author {
+          name
+          bio
+          id
+          photo {
+            url
           }
         }
+        categories {
+          name
+          slug
+        }
+        createdAt
+        excerpt
+        featuredImage {
+          url
+        }
+        slug
+        title
       }
     }
+    aggregate {
+      count
+    }
+  }
+}
   `;
-  const res = await graphQLClient.request(query);
+  const res = await graphQLClient.request(query, {
+    first: 1000, // 限制数据返回的数量!
+    where: {"AND":[]},
+  });
   return res.postsConnection.edges;
 };
 
@@ -254,3 +263,4 @@ export const getComments = async (slug) => {
   });
   return res.comments;
 };
+

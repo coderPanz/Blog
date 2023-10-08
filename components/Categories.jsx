@@ -22,7 +22,7 @@ const Categories = () => {
   return (
     <>
       {/* 文章类别 */}
-      <div className="bg-white rounded-xl px-7 pb-7 border-8">
+      <div className="bg-white rounded-xl px-7 pb-7 border-8 border-gray-300">
         {/* 标题 */}
         <div className="font-bold text-2xl font-mono text-center py-3 border-b">
           文章类别

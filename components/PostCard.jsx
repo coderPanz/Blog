@@ -10,8 +10,9 @@ import "highlight.js/styles/agate.css";
 const PostCard = ({ post, isShow }) => {
 
   const markData = post?.content?.markdown.toString();
+
   useEffect(() => {
-    hljs.highlightAll();
+    hljs.highlightAll()
   }, [markData]);
 
   return (
