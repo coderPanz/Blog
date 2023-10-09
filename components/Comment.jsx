@@ -15,11 +15,11 @@ const Comment = ({ slug }) => {
 
   return (
     // 评论区
-    <div className="mt-8 bg-gray-50 p-6 rounded-xl">
+    <div className="mt-8 bg-gray-50 p-6 rounded-xl dark:bg-gray-800 dark:text-gray-300">
       {/* 标题 */}
       <div className="font-semibold text-2xl italic">评论区</div>
       {/* 评论列表 */}
-      <div className='bg-gray-200 rounded-lg mt-5 p-2'>
+      <div className='bg-gray-200 rounded-lg mt-5 p-2 dark:bg-gray-900'>
         {comments.map((comment, index) => (
           <div key={index} className="px-4 mb-3">
             {/* name and date */}
@@ -28,7 +28,7 @@ const Comment = ({ slug }) => {
               <span className="italic text-gray-500">{moment(comment.createdAt).format('YYYY-MM-DD')}</span>
             </div>
             {/* 评论 */}
-            <span className='text-gray-700 text-sm'>
+            <span className='text-gray-700 text-sm dark:text-gray-500'>
               {comment.comment}
             </span>
           </div>

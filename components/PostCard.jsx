@@ -17,13 +17,13 @@ const PostCard = ({ post, isShow }) => {
 
   return (
     // 总容器
-    <div className=" bg-gray-50 py-7 px-7 rounded-xl shadow-lg mb-8">
+    <div className=" bg-gray-50 p-5 rounded-xl shadow-lg mb-8 dark:bg-gray-800 dark:text-gray-200">
       {/* 图片 */}
       <div className="w-full mb-5">
         <img
           src={post?.featuredImage.url}
           alt={post?.title}
-          className="w-full h-96 rounded-xl"
+          className="w-full h-96 rounded-xl mb-0 mt-0"
         />
       </div>
       {/* 头像作者日期 */}
@@ -32,7 +32,7 @@ const PostCard = ({ post, isShow }) => {
           <img
             src={post?.author.photo.url}
             alt={post?.author.name}
-            className="rounded-full w-9 h-9 mr-4"
+            className="rounded-full w-9 h-9 mr-4 mt-0 mb-0"
           />
         </Link>
         <Link href={"https://github.com/coderPanz"}>
@@ -57,17 +57,17 @@ const PostCard = ({ post, isShow }) => {
         </span>
       </div>
       {/* 标题 */}
-      <div className="text-4xl font-bold mb-8 italic">{post?.title}</div>
+      <div className="text-4xl font-bold mb-8 italic dark:text-gray-300">{post?.title}</div>
       {/* 显示主页和指定帖子根据isShow */}
       {isShow ? (
         <div>
           {/* 概述 */}
-          <div className="mb-5 text-xl">{post?.excerpt}</div>
+          <div className="mb-5 text-xl dark:text-gray-300">{post?.excerpt}</div>
           {/* 按钮 */}
           <div className="w-full text-center text-white">
             {/* 记住href一定要先写 '/' 符号表示从根路由开始匹配, 否则多组件嵌套跳转是会发生问题 */}
             <Link href={`/posts/${post?.slug}`}>
-              <button className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md text-center">
+              <button className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md text-center dark:bg-blue-900 dark:text-gray-300">
                 愿闻其详
               </button>
             </Link>
@@ -75,7 +75,7 @@ const PostCard = ({ post, isShow }) => {
         </div>
       ) : (
         // 正文(转化为markdown语法显示)
-        <div>
+        <div className="dark:text-gray-400">
           <Markdown>{markData}</Markdown>
         </div>
       )}

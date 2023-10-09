@@ -97,16 +97,16 @@ const CommentForm = ({ slug }) => {
 
   return (
     // 评论表单
-    <div className=" bg-gray-50 p-6 rounded-xl">
+    <div className=" bg-gray-50 p-6 rounded-xl dark:bg-gray-800 dark:text-gray-300">
       {/* 标题 */}
       <div className="font-semibold text-2xl italic">知无不言</div>
       <div className="mt-5 grid grid-cols-1 lg:grid-cols-8 gap-6">
         {/* 评论内容 */}
-        <textarea name="comment" value={inputObj.comment ?? ''} onChange={onInputChange} placeholder="言无不尽" id="comment" className=" bg-gray-200 col-span-1 lg:col-span-8 rounded-xl p-3 h-16"></textarea>
+        <textarea name="comment" value={inputObj.comment ?? ''} onChange={onInputChange} placeholder="言无不尽" id="comment" className=" bg-gray-200 col-span-1 lg:col-span-8 rounded-xl p-3 h-16 dark:bg-gray-900"></textarea>
         {/* 用户名 */}
-        <input name="name" value={inputObj.name ?? ''} onChange={onInputChange} placeholder="username" className=" bg-gray-200 col-span-1 lg:col-span-4 p-2 h-10 rounded-md" type="text" />
+        <input name="name" value={inputObj.name ?? ''} onChange={onInputChange} placeholder="username" className=" bg-gray-200 col-span-1 lg:col-span-4 p-2 h-10 rounded-md dark:bg-gray-900" type="text" />
         {/* 邮箱 */}
-        <input name="email" value={inputObj.email ?? ''} onChange={onInputChange} placeholder="email" className=" bg-gray-200 col-span-1 lg:col-span-4 p-2 h-10 rounded-md" type="text" />
+        <input name="email" value={inputObj.email ?? ''} onChange={onInputChange} placeholder="email" className=" bg-gray-200 col-span-1 lg:col-span-4 p-2 h-10 rounded-md dark:bg-gray-900" type="text" />
       </div>
       {/* 记住邮箱和用户 */}
       <div className="flex items-center mt-3">
@@ -117,7 +117,7 @@ const CommentForm = ({ slug }) => {
       {error && <p className="text-sm text-red-500 absolute">缺失必填字段!</p>}
       {/* 提交按钮 */}
       <div className="text-center mt-5">
-        <button onClick={handlePostSubmission} className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md text-white">
+        <button onClick={handlePostSubmission} className="text-lg transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-28 h-10 rounded-md text-white dark:bg-blue-800">
           提交
         </button>
         {showSuccessMessage && <button className="text-base rounded-md w-28 h-10 text-white absolute bg-green-500 ml-72">已提交待审查</button>}
