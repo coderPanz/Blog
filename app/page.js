@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
-import { PostCard, Categories, PostRecent, Profile, Aboutself } from "../components/index";
+import { PostCard, Categories, PostRecent, Profile } from "../components/index";
 import { getPosts, getAuthor } from "@/server";
 
 export default function Home() {
@@ -24,10 +24,6 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-8 mb-8">
-      {/* 顶部 */}
-      <div>
-        <Aboutself />
-      </div>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* 帖子 */}
         <div className="lg:col-span-8 col-span-1 text-center">
